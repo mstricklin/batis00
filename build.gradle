@@ -9,13 +9,15 @@ description = """batis"""
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-
+task listJars {
+    doLast {
+        configurations.compile.each { File file -> println file.name }
+    }
+}
 
 repositories {
-        
-     maven { url "http://mirror/maven2" }
-     maven { url "http://nexus.arlut.utexas.edu:8081/nexus/content/groups/public" }
-     maven { url "http://ciads-nexus:8081/nexus/content/groups/public" }
+     mavenLocal()
+     mavenCentral()
 }
 dependencies {
     compile 'com.google.guava:guava:20.0'
@@ -25,8 +27,14 @@ dependencies {
     compile 'com.zaxxer:HikariCP:2.4.6'
     compile 'org.flywaydb:flyway-core:4.0.3'
     compile 'org.mybatis:mybatis:3.4.4'
+    compile 'com.google.inject:guice:4.1.0'
+    compile 'org.mybatis:mybatis-guice:3.9'
+    compile 'com.google.inject.extensions:guice-multibindings:4.1.0'
+
+
+
     testCompile('junit:junit:4.11') {
-	exclude(module: 'hamcrest-core')
+	    exclude(module: 'hamcrest-core')
     }
     testCompile 'org.hamcrest:hamcrest-library:1.3'
 }

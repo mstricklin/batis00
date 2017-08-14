@@ -16,7 +16,8 @@ public class SchemaVersionManager {
         log.debug("SchemaVersionManager.migrate");
 
         Flyway flyway = new Flyway();
-        flyway.setDataSource("jdbc:hsqldb:file:/home/strickli/scratch/amt.db/amt", "sa", "sa");
+        flyway.setDataSource(ds_);
+//        flyway.setDataSource("jdbc:hsqldb:file:/Users/boobear/scratch/amt.db/amt", "sa", "sa");
         flyway.setLocations("classpath:db/hsqldb/migration");
         flyway.clean();
         flyway.migrate();

@@ -24,8 +24,9 @@ hs_err_pid*
 dependency-reduced-pom.xml
 
 # generated files
-/target/
-/build/
+target/
+build/
+out/
 
 # the HSQLDB directory
 /graph/
