@@ -8,7 +8,6 @@ import java.util.Properties;
 
 import edu.utexas.arlut.ciads.revdb.ConnectionPoolManager;
 import edu.utexas.arlut.ciads.revdb.dao.DaoFactory;
-import edu.utexas.arlut.ciads.revdb.impl.SchemaVersionManager;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -22,9 +21,6 @@ public class HsqldbDaoFactory implements DaoFactory {
         cpm = new ConnectionPoolManager(hikariConfig_);
 
         log.trace("HsqldbDaoFactory CPM: {}", cpm);
-
-        new SchemaVersionManager(cpm.getDataSource()).migrate();
-        log.trace("Done migrate");
 
         ds = cpm.getDataSource();
     }

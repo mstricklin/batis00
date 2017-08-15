@@ -27,6 +27,7 @@ dependency-reduced-pom.xml
 target/
 build/
 out/
+classes/
 
 # the HSQLDB directory
 /graph/

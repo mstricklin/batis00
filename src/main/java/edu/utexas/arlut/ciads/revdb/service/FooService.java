@@ -1,6 +1,8 @@
-package edu.utexas.arlut.ciads.revdb.main;
+package edu.utexas.arlut.ciads.revdb.service;
 
 import com.google.inject.Inject;
+import edu.utexas.arlut.ciads.revdb.DTO.Foo;
+import edu.utexas.arlut.ciads.revdb.mappers.FooMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.guice.transactional.Transactional;
 

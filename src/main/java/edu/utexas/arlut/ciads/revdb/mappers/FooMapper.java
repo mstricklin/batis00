@@ -1,7 +1,9 @@
-package edu.utexas.arlut.ciads.revdb.main;
+package edu.utexas.arlut.ciads.revdb.mappers;
 
 
 import java.util.List;
+
+import edu.utexas.arlut.ciads.revdb.DTO.Foo;
 
 public interface FooMapper {
     Foo select(int id);

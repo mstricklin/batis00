@@ -1,6 +1,5 @@
 package edu.utexas.arlut.ciads.revdb.dao;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;

@@ -2,9 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="edu.utexas.arlut.ciads.revdb.main.FooMapper">
 
-    <select id="select" resultType="edu.utexas.arlut.ciads.revdb.main.Foo">
+<mapper namespace="edu.utexas.arlut.ciads.revdb.mappers.FooMapper">
+
+    <select id="select" resultType="edu.utexas.arlut.ciads.revdb.DTO.Foo">
         select * from foo where id = #{id};
     </select>
     <insert id="insert">
@@ -13,16 +14,16 @@
         values
             (#{id}, #{branch}, #{vstart}, default, #{s0}, #{s1}, #{s2});
     </insert>
-    <select id="list" resultType="edu.utexas.arlut.ciads.revdb.main.Foo">
+    <select id="list" resultType="edu.utexas.arlut.ciads.revdb.DTO.Foo">
         select * from FOO;
     </select>
-    <update id="_expire" parameterType="edu.utexas.arlut.ciads.revdb.main.Foo">
+    <update id="_expire" parameterType="edu.utexas.arlut.ciads.revdb.DTO.Foo">
         update foo set vend = 3
         where id = #{id}
           and branch = #{branch}
           and vstart = #{vstart};
     </update>
-    <update id="_update" parameterType="edu.utexas.arlut.ciads.revdb.main.Foo">
+    <update id="_update" parameterType="edu.utexas.arlut.ciads.revdb.DTO.Foo">
         insert into foo (id, branch, vstart, vend, s0, s1, s2)
              values (#{id}, #{branch}, 3, default, #{s0}, #{s1}, #{s2});
     </update>

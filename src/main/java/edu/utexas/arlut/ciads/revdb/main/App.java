@@ -7,19 +7,16 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.google.inject.*;
-import com.zaxxer.hikari.HikariDataSource;
-import edu.utexas.arlut.ciads.revdb.dao.HikariFactory;
-import edu.utexas.arlut.ciads.revdb.impl.SchemaVersionManager;
-import lombok.Data;
+import edu.utexas.arlut.ciads.revdb.DTO.Foo;
+import edu.utexas.arlut.ciads.revdb.DTO.RuntimeContextProvider;
+import edu.utexas.arlut.ciads.revdb.DTO.RuntimeContextProvider.RuntimeContext;
+import edu.utexas.arlut.ciads.revdb.mappers.FooMapper;
+import edu.utexas.arlut.ciads.revdb.service.FooService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.datasource.DataSourceFactory;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionManager;
+import org.hsqldb.Database;
 import org.mybatis.guice.XMLMyBatisModule;
-import org.mybatis.guice.session.SqlSessionManagerProvider;
 
-import javax.inject.Provider;
 import javax.sql.DataSource;
 
 @Slf4j
@@ -63,20 +60,33 @@ public class App {
 
         };
 
-        Injector injector = Guice.createInjector(mbm);
-//        for (Map.Entry<Key<?>, Binding<?>> e : injector.getAllBindings().entrySet())
-//            log.info("binding {} => {}", e.getKey(), e.getValue());
+        AbstractModule am = new AbstractModule() {
+            @Override
+            protected void configure() {
+//                bind(RuntimeContext.class)
+                        ;//.toProvider(RuntimeContextProvider.class);
+                bind(RuntimeContextProvider.class);
+                bind(TThread.class);
+                bind(RC.class).in(Singleton.class);
+            }
+        };
+
+        Injector injector = Guice.createInjector(mbm, am);
+
+        for (Map.Entry<Key<?>, Binding<?>> e : injector.getAllBindings().entrySet())
+            log.info("binding {} => {}", e.getKey(), e.getValue());
 //        SqlSessionManager
 //        SqlSession
 //        SqlSessionManagerProvider
+
 
         FooService fs = injector.getInstance(FooService.class);
         for (Foo f : fs.list())
             log.info("f: {}", f);
         log.info("");
-        Foo f1 = fs.select(1);
-        log.info("f1: {}", f1);
-        fs.update(f1);
+//        Foo f1 = fs.select(1);
+//        log.info("f1: {}", f1);
+//        fs.update(f1);
         log.info("");
         for (Foo f : fs.list())
             log.info("f: {}", f);
@@ -84,6 +94,24 @@ public class App {
         FooMapper fm = injector.getInstance(FooMapper.class);
         SqlSessionFactory ssf = injector.getInstance(SqlSessionFactory.class);
         log.info("SqlSessionFactory {}", ssf);
+
+//        RuntimeContextProvider rcp = injector.getInstance(RuntimeContextProvider.class);
+//        log.info("RuntimeContextProvider {}", rcp);
+////        rcp.set(1, 1);
+//        RuntimeContext rc = rcp.get();
+//        log.info("RuntimeContext {}", rc);
+//        rc.foo();
+
+//        Provider<RC> rcp =
+
+
+        TThread tt = injector.getInstance(TThread.class);
+        Thread t = new Thread(tt);
+        t.start();
+
+
+
+
 
 
 //        SqlSessionFactory ssf;
@@ -142,7 +170,7 @@ public class App {
 //            org.hsqldb.DatabaseManager.closeDatabases(0);
 //        }
 
-        org.hsqldb.DatabaseManager.closeDatabases(0);
+        org.hsqldb.DatabaseManager.closeDatabases(Database.CLOSEMODE_NORMAL);
 
     }
 }

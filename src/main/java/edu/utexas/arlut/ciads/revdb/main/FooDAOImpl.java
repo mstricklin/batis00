@@ -1,5 +1,7 @@
 package edu.utexas.arlut.ciads.revdb.main;
 
+import edu.utexas.arlut.ciads.revdb.DTO.Foo;
+import edu.utexas.arlut.ciads.revdb.mappers.FooMapper;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;

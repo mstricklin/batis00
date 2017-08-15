@@ -8,7 +8,7 @@
             <transactionManager type="JDBC"/>
             <dataSource type="edu.utexas.arlut.ciads.revdb.dao.HikariFactory">
                 <property name="driver" value="org.hsqldb.jdbcDriver"/>
-                <property name="jdbcUrl" value="jdbc:hsqldb:file:/Users/boobear/scratch/amt.db/amt"/>
+                <property name="jdbcUrl" value="jdbc:hsqldb:file:/tmp/scratch/amt.db/amt"/>
                 <property name="username" value="sa"/>
                 <property name="password" value="sa"/>
 
@@ -22,8 +22,6 @@
         </environment>
     </environments>
     <mappers>
-
-        <!--<mapper class="edu.utexas.arlut.ciads.revdb.main.FooMapper22"/>-->
         <mapper resource="mappers/FooMapper.xml"/>
     </mappers>
 </configuration>
